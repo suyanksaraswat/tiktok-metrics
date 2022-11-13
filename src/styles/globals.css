@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: bolder;
+  src: url("../../public/fonts/GeneralSans-Bold.otf");
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: lighter;
+  src: url("../../public/fonts/GeneralSans-Extralight.otf");
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: light;
+  src: url("../../public/fonts/GeneralSans-Light.otf");
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: medium;
+  src: url("../../public/fonts/GeneralSans-Medium.otf");
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: normal;
+  src: url("../../public/fonts/GeneralSans-Regular.otf");
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  font-weight: bold;
+  src: url("../../public/fonts/GeneralSans-Semibold.otf");
+}
