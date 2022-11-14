@@ -8,34 +8,30 @@ import { TikTokClient } from "tiktok-private-api";
 const scraper = new TikTokClient();
 
 export const exampleRouter = router({
-  getUserData: publicProcedure
-    .input(z.object({ username: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const data = await ctx.prisma.user.findFirst({
-        where: {
-          username: input.username,
-        },
-      });
+  // getUserData: publicProcedure
+  //   .input(z.object({ username: z.string() }))
+  //   .query(async ({ ctx, input }) => {
+  //     const data = await ctx.prisma.user.findFirst({
+  //       where: {
+  //         username: input.username,
+  //       },
+  //     });
 
-      if (data) {
-        return data;
-      }
+  //     if (data) {
+  //       return data;
+  //     }
 
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Account does not exist in DB",
-      });
-    }),
+  //     throw new TRPCError({
+  //       code: "INTERNAL_SERVER_ERROR",
+  //       message: "Account does not exist in DB",
+  //     });
+  //   }),
 
   findTiktokUser: publicProcedure
     .input(z.object({ username: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      console.log("### input-", input);
-
       try {
         const user = await scraper.user.info(input.username);
-        console.log("### user-", user);
-        console.log("### video-", user?.userInfo?.itemList[0]?.stats);
 
         let views = 0,
           comms = 0,
@@ -67,14 +63,15 @@ export const exampleRouter = router({
           avgComments: comms || null,
           avgLikes: likes || null,
           avgShare: shares || null,
+          interactionRate: (comms + likes + shares) / views || null,
         };
 
-        console.log("### data", data);
+        return data;
 
-        const createdUser = await ctx.prisma.user.create({
-          data,
-        });
-        return createdUser;
+        // const createdUser = await ctx.prisma.user.create({
+        //   data,
+        // });
+        // return createdUser;
       } catch (err) {
         console.log("### err-", err);
         throw new TRPCError({

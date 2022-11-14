@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     onSuccess: (data) => {
       console.log("### data on success-", data);
 
-      if (data.id) {
+      if (data) {
         router.push(`/stats/${data.username}`);
       }
     },
