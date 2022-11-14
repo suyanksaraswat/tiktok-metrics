@@ -10,18 +10,24 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
   // const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
 
   const findTiktokUser = trpc.example.findTiktokUser.useMutation({
     onSuccess: (data) => {
       console.log("### data on success-", data);
 
-      router.push(`/stats/${data.username}`);
+      if (data.id) {
+        router.push(`/stats/${data.username}`);
+      }
+    },
+    onError: (err) => {
+      setError(err.message);
     },
   });
 
-  const [username, setUsername] = useState("");
-
   const handleSubmit = () => {
+    setError("");
     findTiktokUser.mutate({ username });
   };
 
@@ -43,19 +49,16 @@ const Home: NextPage = () => {
         <StyledInput
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          // error={true}
-          // errorMessage="Account does not exist"
+          error={error !== ""}
+          errorMessage={error}
         />
         <button
           className="w-full cursor-pointer rounded-lg bg-[#6B53FF] py-3 px-4 text-sm font-bold text-white hover:shadow-button disabled:bg-[#EEEFF2] disabled:text-[#B2B7C2]"
-          disabled={username === ""}
+          disabled={username === "" || findTiktokUser.isLoading}
           onClick={handleSubmit}
         >
-          Show Performance
+          {findTiktokUser.isLoading ? "Fetching Data..." : "Show Performance"}
         </button>
-        {/* <div className="flex w-full items-center justify-center pt-6 text-2xl text-blue-500">
-          {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
-        </div> */}
       </main>
     </>
   );
