@@ -8,7 +8,6 @@ import { router } from "../server/trpc/trpc";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
-  // const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
