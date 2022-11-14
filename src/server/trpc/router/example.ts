@@ -1,7 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { TikTokClient } from "tiktok-private-api";
 
 const scraper = new TikTokClient();
@@ -65,7 +66,7 @@ export const exampleRouter = router({
           })
         );
 
-        let data = {
+        const data = {
           username: input.username,
           nickname: user?.userInfo?.nickname || null,
           avatar: user?.userInfo?.avatarLarger || null,

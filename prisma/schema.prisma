@@ -17,11 +17,11 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   username    String
-  nickname    String
-  avatar      String
-  followers   String
-  avgViews    String
-  avgComments String
-  avgLikes    String
-  avgShare    String
+  nickname    String?
+  avatar      String?
+  followers   Int?
+  avgViews    Int?
+  avgComments Int?
+  avgLikes    Int?
+  avgShare    Int?
 }
