@@ -8,24 +8,24 @@ import { TikTokClient } from "tiktok-private-api-suyank";
 const scraper = new TikTokClient();
 
 export const exampleRouter = router({
-  // getUserData: publicProcedure
-  //   .input(z.object({ username: z.string() }))
-  //   .query(async ({ ctx, input }) => {
-  //     const data = await ctx.prisma.user.findFirst({
-  //       where: {
-  //         username: input.username,
-  //       },
-  //     });
+  getUserData: publicProcedure
+    .input(z.object({ username: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const data = await ctx.prisma.user.findFirst({
+        where: {
+          username: input.username,
+        },
+      });
 
-  //     if (data) {
-  //       return data;
-  //     }
+      if (data) {
+        return data;
+      }
 
-  //     throw new TRPCError({
-  //       code: "INTERNAL_SERVER_ERROR",
-  //       message: "Account does not exist in DB",
-  //     });
-  //   }),
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Account does not exist in DB",
+      });
+    }),
 
   findTiktokUser: publicProcedure
     .input(z.object({ username: z.string() }))

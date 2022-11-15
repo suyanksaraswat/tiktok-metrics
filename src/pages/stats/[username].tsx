@@ -20,21 +20,20 @@ const Stats: NextPage = () => {
     interactionRate: null,
   });
 
-  const findTiktokUser = trpc.example.findTiktokUser.useMutation({
-    onSuccess: (data) => {
-      console.log("### data on success-", data);
-      setData(data);
-    },
-    onError: (err) => {
-      router.push("/");
-    },
-  });
-
-  useEffect(() => {
-    if (username) {
-      findTiktokUser.mutate({ username: username as string });
+  const { isFetching } = trpc.example.getUserData.useQuery(
+    { username: username as string },
+    {
+      refetchOnWindowFocus: false,
+      enabled: Boolean(username),
+      onSuccess: (data) => {
+        console.log("### data on success-", data);
+        setData(data);
+      },
+      onError: (err) => {
+        router.push("/");
+      },
     }
-  }, [username]);
+  );
 
   return (
     <>
@@ -45,7 +44,7 @@ const Stats: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex min-h-screen max-w-4xl flex-col justify-center p-4">
-        {findTiktokUser.isLoading ? (
+        {isFetching ? (
           <p className="font-generalsans text-base font-bold text-[#525C76]">
             Loading...
           </p>
