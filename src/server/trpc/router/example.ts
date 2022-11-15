@@ -66,6 +66,8 @@ export const exampleRouter = router({
           interactionRate: ((comms + likes + shares) * 100) / views || null,
         };
 
+        console.log("### data-", data);
+
         const findUser = await ctx.prisma.user.findFirst({
           where: {
             username: input.username,
