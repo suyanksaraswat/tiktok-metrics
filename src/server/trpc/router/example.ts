@@ -3,7 +3,7 @@ import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import { TikTokClient } from "tiktok-private-api";
+import { TikTokClient } from "tiktok-private-api-suyank";
 
 const scraper = new TikTokClient();
 
