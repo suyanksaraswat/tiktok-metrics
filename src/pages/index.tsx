@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       }
     },
     onError: (err) => {
-      setError(err.message);
+      setError("Something went wrong! Please try after sometime.");
     },
   });
 
