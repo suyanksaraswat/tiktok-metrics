@@ -66,12 +66,26 @@ export const exampleRouter = router({
           interactionRate: ((comms + likes + shares) * 100) / views || null,
         };
 
-        return data;
+        const findUser = await ctx.prisma.user.findFirst({
+          where: {
+            username: input.username,
+          },
+        });
 
-        // const createdUser = await ctx.prisma.user.create({
-        //   data,
-        // });
-        // return createdUser;
+        if (findUser) {
+          const updatedUser = await ctx.prisma.user.update({
+            where: {
+              id: findUser.id,
+            },
+            data,
+          });
+          return updatedUser;
+        } else {
+          const createdUser = await ctx.prisma.user.create({
+            data,
+          });
+          return createdUser;
+        }
       } catch (err) {
         console.log("### err-", err);
         throw new TRPCError({
