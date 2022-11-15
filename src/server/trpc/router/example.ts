@@ -63,7 +63,7 @@ export const exampleRouter = router({
           avgComments: comms || null,
           avgLikes: likes || null,
           avgShare: shares || null,
-          interactionRate: (comms + likes + shares) / views || null,
+          interactionRate: ((comms + likes + shares) * 100) / views || null,
         };
 
         return data;

@@ -46,7 +46,9 @@ const Stats: NextPage = () => {
 
       <main className="container mx-auto flex min-h-screen max-w-4xl flex-col justify-center p-4">
         {findTiktokUser.isLoading ? (
-          <p>Loading...</p>
+          <p className="font-generalsans text-base font-bold text-[#525C76]">
+            Loading...
+          </p>
         ) : (
           <>
             <p className="font-generalsans text-base font-bold text-[#525C76]">
@@ -91,9 +93,7 @@ const Stats: NextPage = () => {
                 </p>
 
                 <h1 className="font-generalsans text-3xl font-extrabold text-[#0F1D40]">
-                  {data?.interactionRate
-                    ?.toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  {Math.round(data?.interactionRate)}%
                 </h1>
               </div>
 
